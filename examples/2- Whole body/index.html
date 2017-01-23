@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<!-- © 2017 Erik Koopmans -->
+<html>
+
+	<head>
+		<title>FlipPanel demo</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- Include the CSS source -->
+		<link rel="stylesheet" type="text/css" href="../../FlipPanel.css">
+		
+		<style type="text/css">
+			html, body {
+				/* Set up the body to fill the screen */
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+				
+				/* Optional styling (white text is recommended) */
+				color: white;
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<!-- Include the JavaScript source -->
+		<script src="../../FlipPanel.js"></script>
+
+		<script>
+			// Callback to fill the panel with contents
+			function myCallback(thisPanel) {
+				// Text on the front of two tiles
+				myPanel.tile[0][0].applyTemplate('f', '<h1>Top-Left</h1>');
+				myPanel.tile[2][1].applyTemplate('f', '<h1>Bottom-Right</h1>');
+				
+				// Text on the back of each tile
+				myPanel.tile[0][0].applyTemplate('b', '<h1>Top-Left</h1><p>Sample text</p><button onclick="myPanel.ruffle()">Ruffle tiles</button>');
+				myPanel.tile[0][1].applyTemplate('b', '<h1>Top-Right</h1><p>Sample text</p>');
+				myPanel.tile[1][0].applyTemplate('b', '<h1>Mid-Left</h1><p>Sample text</p>');
+				myPanel.tile[1][1].applyTemplate('b', '<h1>Mid-Right</h1><p>Sample text</p>');
+				myPanel.tile[2][0].applyTemplate('b', '<h1>Bottom-Left</h1><p>Sample text</p>');
+				myPanel.tile[2][1].applyTemplate('b', '<h1>Bottom-Right</h1><p>Sample text</p>');
+			}
+			
+			// Establish settings for FlipPanel
+			var destination = document.body;
+			var opts = {
+				nx: 2,
+				ny: 3,
+				imgFront: '../panelFront.jpg',
+				imgBack: '../panelBack.jpg',
+				ruffleTimer: 20000
+			}
+			
+			// Create the FlipPanel and fill it
+			var myPanel = new FlipPanel(destination, myCallback, opts);
+		</script>
+
+	</body>
+
+</html>
