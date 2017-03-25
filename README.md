@@ -6,8 +6,8 @@ This is an x-by-y grid of flip tiles as described [here](https://davidwalsh.name
 
 ## Install
 
-1. Copy `FlipPanel.js` and `FlipPanel.css` to your project directory.
-2. Include `<script src="js/skyscanner.js"></script>` and `<link rel="stylesheet" type="text/css" href="FlipPanel.css">` in your HTML document.
+1. Copy `flippanel.js` and `flippanel.css` to your project directory.
+2. Include `<script src="flippanel.js"></script>` and `<link rel="stylesheet" type="text/css" href="flippanel.css">` in your HTML document.
 
 ## Usage
 

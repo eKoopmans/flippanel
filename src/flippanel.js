@@ -4,7 +4,7 @@ var FlipPanel = function(parent, callback, opts) {
 	// Set up properties
 	this.parent = parent;
 	this.callback = callback;
-	
+
 	// Handle optional parameters
 	this.nx = opts.hasOwnProperty('nx') ? opts.nx : 2;
 	this.ny = opts.hasOwnProperty('ny') ? opts.ny : 3;
@@ -12,13 +12,13 @@ var FlipPanel = function(parent, callback, opts) {
 	this.imgBack = opts.hasOwnProperty('imgBack') ? opts.imgBack : this.imgFront;
 	this.ruffleTimer = opts.hasOwnProperty('ruffleTimer') ? opts.ruffleTimer : null;
 	this.ruffleDelay = opts.hasOwnProperty('ruffleDelay') ? opts.ruffleDelay : 120;
-	
+
 	// Pre-allocate tile array
 	this.tile = [];
 	for (var y=0; y<this.ny; y++) {
 		this.tile.push(new Array(this.nx));
 	}
-	
+
 	// Find the dimensions of the panel image
 	var img = new Image(), target = this;
 	img.onload = function() {
@@ -41,7 +41,7 @@ FlipPanel.prototype.create = function() {
 	this.dom = document.createElement('div');
 	this.dom.className += 'flip-panel';
 	this.parent.appendChild(this.dom);
-	
+
 	// Apply styles
 	// ** INSTEAD, MAKE THIS THING HAVE A CLASS, RIGHT NOW IT'S A PLAIN DIV!!!
 	this.dom.style.width = '100%';
@@ -58,14 +58,14 @@ FlipPanel.prototype.create = function() {
 	// (initial update is performed once image size is determined above)
 //	this.dom.addEventListener('resize', this.update.bind(this), false);
 	window.addEventListener('resize', this.update.bind(this), false);
-	
+
 	// Add ruffle effect
 	if (this.ruffleTimer != null) {
 		// ** TO CONSIDER: using 'bind' below makes it impossible to remove the listener, which is bad
 		window.addEventListener('load', this.ruffle.bind(this), false);
 		if (this.ruffleTimer > 0)	{ setInterval(this.ruffle.bind(this), this.ruffleTimer); }
 	}
-	
+
 	// Execute callback
 	this.callback(this);
 }
@@ -73,11 +73,11 @@ FlipPanel.prototype.create = function() {
 FlipPanel.prototype.createTile = function(x, y) {
 	// Create the tile
 	var tile = new FlipTile(this.dom);
-	
+
 	// Calculate the tile's width and height
 	var w = Math.floor(100/this.nx), h = Math.floor(100/this.ny);
 	var w2 = (x<this.nx-1 ? w:100-(x*w)), h2 = (y<this.ny-1 ? h:100-(y*h));
-	
+
 	// Set the tile's position
 	tile.dom.style.position = 'absolute';
 	tile.dom.style.left = x*w + '%';
@@ -114,7 +114,7 @@ FlipPanel.prototype.updateSize = function() {
 //	var parentHeight = Math.min(parentX, parentY);
 	var parentWidth = this.parent.clientWidth;
 	var parentHeight = this.parent.clientHeight;
-	
+
 	// Create a size string for later use
 	this.sizeString = Math.round(parentWidth) + 'px';
 
@@ -161,13 +161,13 @@ var FlipTile = function(parent) {
 	this.domFront = this.dom.children[0].children[0];
 	this.domBack = this.dom.children[0].children[1];
 	//this.domFront.addEventListener('click', this.flip.bind(this), false);
-	
+
 	// Un-focus the tile if the back is clicked
 	// ** INTEGRATE TOUCHSTART EVENTS FOR PHONES
 	// ** Actually, 'click' is triggering on my Android - problem is hover
 	this.domBack.addEventListener('click', this.hide.bind(this), false);
 	this.domBack.addEventListener('touchstart', this.hide.bind(this), false);
-	
+
 	this.domFront.addEventListener('click', this.show.bind(this), false);
 	this.domFront.addEventListener('touchstart', this.show.bind(this), false);
 }
@@ -180,7 +180,7 @@ FlipTile.prototype.show = function() {
 	var tiles = document.getElementsByClassName('hover');
 	while (tiles.length)
 		tiles[0].classList.remove('hover');
-	
+
 	this.dom.classList.add('hover');
 }
 FlipTile.prototype.hide = function() {
@@ -211,7 +211,7 @@ FlipTile.prototype.applyText = function(face, title, info) {
 			contents += '<td>' + info[i][j] + '</td>';
 		contents += '</tr>';
 	}
-	
+
 	// Generate the HTML for the tile and apply it
 	var htmlStr = this.htmlText.
 		replace('%title%', title).
@@ -257,18 +257,18 @@ function create(dest, htmlStr) {
 	if (typeof(dest) === 'string') {
 		dest = document.getElementById(dest);
 	}
-	
+
 	// Append DOM children one at a time, storing links to each
 	var obj = [], temp = document.createElement('div');
 	temp.innerHTML = htmlStr.trim();
 	while (temp.firstChild) {
 		obj.push( dest.appendChild(temp.firstChild) );
 	}
-	
+
 	// Remove the list layer for unary objects
 	if (obj.length == 1)
 		obj = obj[0];
-	
+
 	// Return the created objects
 	return obj;
 }

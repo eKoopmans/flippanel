@@ -18,8 +18,8 @@
 	/* May not be necessary */
 	-moz-transform: perspective(1000px);
 	-ms-transform: perspective(1000px);
-	-moz-transform-style: preserve-3d; 
-	-ms-transform-style: preserve-3d; 
+	-moz-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
 }
 
 .flip-container:focus {
@@ -54,18 +54,18 @@
 	-moz-transform-style: preserve-3d;
 	-o-transform-style: preserve-3d;
 	transform-style: preserve-3d;
-	
+
 	-webkit-transition: 0.6s;
 	-moz-transition: 0.6s;
 	-o-transition: 0.6s;
 	transition: 0.6s;
-	
+
 	/* May not be necessary */
 	-webkit-transform-origin: 50% 50%;
 	-moz-transform-origin: 50% 50%;
 	-ms-transform-origin: 50% 50%;
 	transform-origin: 50% 50%;
-	
+
 	position: relative;
 }
 
@@ -74,7 +74,7 @@
 	-moz-backface-visibility: hidden;
 	-o-backface-visibility: hidden;
 	backface-visibility: hidden;
-	
+
 	position: absolute;
 	top: 0;
 	left: 0;
